@@ -1,0 +1,189 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>这是网页标题</title>
+    <link rel="stylesheet" href="./layui/css/layui.css">
+    <script src="./layui/jquery-3.6.0.min.js"></script>
+    <script src="./layui/layui.js"></script>
+    <script src="./layui/vue.js"></script>
+    <!-- 标签中的注释 -->
+    <!-- // javascript中的注释 -->
+    <!-- /**/  style中的注释 -->
+    <style>
+      .nav-item {
+        text-align: center;
+        /*设置div鼠标样式为手指*/
+        cursor: pointer; 
+      }
+      .nav-item>a {
+        color: white;
+      }
+      .nav-item:hover {
+        background-color:red;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <div>
+        <div>第一小行：搜索栏</div>
+        <div class="layui-row" id="navbar" style="background-color:#2B579A;height:40px;line-height:40px;color:white;">         
+            <template v-for="(nav,index) in navs">
+              <div v-if="index==0" class="layui-col-md1 layui-col-md-offset1 nav-item" >
+                <a :href="nav.href">{{ nav.title }}</a>
+              </div>  
+              <div v-else class="layui-col-md1 nav-item">
+                <a :href="nav.href">{{ nav.title }}</a>
+              </div> 
+            </template>
+        </div>
+      </div>
+      <div class="layui-row">
+        <div class="layui-col-md8 layui-col-md-offset2">
+          <div class="layui-row">
+            <div class="layui-col-md4" style="background-color:red;">
+              <div>广告轮播</div>
+
+              <div class="layui-row navtags">
+                <template v-for="(tag,index) in tags">
+                  <div v-if="index<=2" class="layui-col-md3" style="background-color: white;">{{tag.title}}</div>
+                  <div v-else class="layui-col-md3" style="background-color: pink;">{{tag.title}}</div>
+                </template>
+              </div>
+              <script>
+                var tagele = new Vue({
+                  el: ".navtags",
+                  data: {
+                    tags: [
+                      {title: '电音'},
+                      {title: '酒吧'},
+                      {title: '夜店', cates: [{title: "二级夜店"}, {}, {}]},
+                      {title: '重低音'},
+                      {title: '劲爆'},
+                    ]
+                  }
+                })
+              </script>
+
+            </div>
+
+            <div class="layui-col-md8" id="musicele" style="background-color:green;">
+              <template v-for="(music,index) in musics">
+                <div v-if="index<=2" style="color: red;"> <input type="checkbox"> 1 </div>
+                <div v-else  style="color: white;"> <input type="checkbox"> 2 </div>
+              </template>
+              <div> <button id="select">全选/反选</button> </div>
+            </div>
+            <script>
+            // 全选反选的代码逻辑
+            // 1. 根据按钮找到相关的所有多选框
+            // 2. 让所有多选框的选择状态"取反"
+            // 3. 将选中状态的多选框对应的音乐ID进行存储
+            var music = new Vue({
+              el: "#musicele",
+              data: {
+                musics: [
+                  {},{},{},{}
+                ]
+              }
+            })
+            </script>
+            <script>
+              // 1. 原生JS=最原始的JavaScript代码  优点：执行速度快  缺点：代码繁琐
+              // document:文档
+              // var let const 的区别是什么？
+              // DOM=DocumentObjectModel=文档对象模型 BOM=BrowserObjectModel=浏览器对象模型
+              // 能否熟练操作DOM？能够熟练查找网页元素/设置元素样式或属性或事件
+              //let selectAll = document.getElementById("select")
+              //selectAll.onclick = function(e){
+                //console.log("hello world")
+              //}
+              // 2. 使用jQuery=JavaScript的一个封装后的框架  优点：使用简单  缺点：执行速度稍慢
+              // $ = jQuery对象
+              $("#select").click(function(e){
+                // 1. 获取所有多选框(最难)
+                // this=这个=自己 等价于python中的self
+                let allcheck = $(this).parent().parent().find("input")
+                console.log(allcheck)
+                // 2. 切换多选框状态  取反
+                let values = []
+                $.each(allcheck, function(index, value) {
+                  let a = $(value).prop("checked")
+                  $(value).prop("checked",!a)
+                  // 3. 获取选中状态的多选框的value属性并保存至数组(列表)中
+                  if(a) {
+                    // 不添加数据
+                  } else {
+                    // 添加数据
+                  }
+                })
+                
+              })
+            </script>
+          </div>
+          <div class="layui-row">
+            <div class="layui-col-md8" style="background-color:yellow;">
+              <div class="layui-row">
+                <div class="layui-col-md6" style="background-color:pink;">最新上传DJ舞曲</div>
+                <div class="layui-col-md6" style="background-color:blue;">会员收藏DJ舞曲</div>
+              </div>
+              <div class="layui-row">
+                <div class="layui-col-md2">分类1</div>
+                <div class="layui-col-md2">分类1</div>
+                <div class="layui-col-md2">分类1</div>
+                <div class="layui-col-md2">分类1</div>
+                <div class="layui-col-md2">分类1</div>
+                <div class="layui-col-md2">分类1</div>
+                <div class="layui-col-md2">分类1</div>
+                <div class="layui-col-md2">分类1</div>
+                <div class="layui-col-md2">分类1</div>
+                <div class="layui-col-md2">分类1</div>
+                <div class="layui-col-md2">分类1</div>
+                <div class="layui-col-md2">分类1</div>
+              </div>
+            </div>
+            <div class="layui-col-md4" style="background-color:orange;">昨日单曲试听排行</div>
+          </div>
+          <div class="layui-row">
+            <div class="layui-col-md3" style="background-color: red;">七月上传慢摇串烧</div>
+            <div class="layui-col-md3" style="background-color: blue;">七月上传劲爆串烧</div>
+            <div class="layui-col-md3" style="background-color: green;">七月上传中文舞曲</div>
+            <div class="layui-col-md3" style="background-color: pink;">七月上传英文舞曲</div>
+          </div>
+          <div class="layui-row">
+            <div class="layui-col-md3" style="background-color: blue;">慢摇串烧排行</div>
+            <div class="layui-col-md3" style="background-color: green;">串烧舞曲排行</div>
+            <div class="layui-col-md3" style="background-color: pink;">中文舞曲排行</div>
+            <div class="layui-col-md3" style="background-color: red;">英文舞曲排行</div>
+          </div>
+        </div>
+      </div>
+      <div style="text-align:center;">
+        <p>本站<a href="http://www.72dj.com"><b>DJ舞曲</b></a>由网友上传发布，如果侵犯到您的权益请来信告知，我们会在3个工作日之内删除-邮箱：wm72dj#qq.com</p>
+        <p>Copyright 2016 www.72dj.com All rights reserved . 作品上传 - 联系我们 - 浙ICP备11020928号</p>
+      </div>
+      <div style="text-align:center;position:fixed;bottom:0;width:100%;">
+        <p>悬停版权信息<a href="http://www.72dj.com"><b>DJ舞曲</b></a>由网友上传发布，如果侵犯到您的权益请来信告知，我们会在3个工作日之内删除-邮箱：wm72dj#qq.com</p>
+        <p>Copyright 2016 www.72dj.com All rights reserved . 作品上传 - 联系我们 - 浙ICP备11020928号</p>
+      </div>
+    </div>
+  </body>
+  <script>
+    var example1 = new Vue({
+      el: '#navbar',
+      data: {
+        navs: [
+          { href: 'http://www.72dj.com/', title: '首页'},
+          { href: 'http://www.72dj.com/jb/', title: '慢摇串烧'},
+          { href: 'http://www.72dj.com/xc/', title: '劲爆现场'},
+          { href: 'http://www.72dj.com/my/', title: '首页'},
+          { href: 'http://www.72dj.com/yw/', title: '首页'},
+          { href: 'http://www.72dj.com/zw/', title: '首页'},
+          { href: 'http://www.72dj.com/top/', title: '首页'},
+          { href: 'http://www.72dj.com/top/free.htm', title: '首页'},
+          { href: 'http://www.72dj.com/top/Month.htm', title: '首页'},
+        ]
+      }
+    })
+  </script>
+</html>

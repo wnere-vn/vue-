@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>开始使用 layui</title>
+  <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+  <script src="vue.js"></script>
+  <link rel="stylesheet" href="./layui/css/layui.css">
+  <link rel="stylesheet" type="text/css" href="../css/style.css" />
+  <link rel="shortcut icon" href="https://media.ailongmiao.com/favicon.ico" />
+  <script src="./layui/layui.js"></script>
+  <style type="text/css">
+    
+    /*全局样式*/
+    body{
+      position: relative;
+      background-color: #EAEAEA;
+      font-family: Droid Sans,PingFang SC,Helvetica,Roboto,Arial,"FontAwesome", sans-serif;
+      font-weight: normal;
+      color: #333;
+      font-size: 1.4rem;
+      top: 0;
+      bottom: 0;
+    }
+    dd{
+      text-align: center
+    }
+    article, aside, details, figcaption, figure, footer, header, hgroup, menu, main, nav, section, summary {
+      display: block;
+    }
+    *, *:before, *:after {
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+      -webkit-user-select: auto;
+      -moz-user-focus: auto;
+      -moz-user-select: auto;
+    }
+    .iconfont {
+      font-family: "iconfont" !important;
+      font-size: 16px;
+      font-style: normal;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    a{
+      text-decoration:none;
+    }
+    a:hover{
+      text-decoration:none;
+    }
+    ul {
+      display: block;
+      list-style-type: disc;
+      margin-block-start: 1em;
+      margin-block-end: 1em;
+      margin-inline-start: 0px;
+      margin-inline-end: 0px;
+      padding-inline-start: 40px;
+    }
+    li {
+      list-style: none;
+    }
+    .search-bg{
+      background: #fff;
+      height: 321px;
+      border-radius: 4px 4px 0 0;
+    }
+    .layui-col-space20 {
+      margin: -10px;
+    }
+    .search {
+      max-width: 780px;
+      margin: 88px auto 0;
+    }
+    .f-cb, .f-cbli li {
+      zoom: 1;
+    }
+    .f-cb:after, .f-cbli li:after {
+      display: block;
+      clear: both;
+      visibility: hidden;
+      height: 0;
+      overflow: hidden;
+      content: ".";
+    }
+    .f-cb, .f-cbli li {
+      zoom: 1;
+    }
+    .f-tac {
+      text-align: center;
+    }
+    .f-fl {
+      float: left;
+    }
+    .f-pr {
+      position: relative;
+    }
+    .f-csp {
+      cursor: pointer;
+    }
+    /*导航栏样式*/
+    .sidebar-logo h1 {
+      font-size: 1.6rem;
+      text-align: center;
+      height: 60px;
+      line-height: 60px;
+      border-bottom: 1px rgba(255,255,255,.2) solid;
+    }
+    .sidebar-logo a {
+      color: #ededed;
+      letter-spacing: 2px;
+    }
+    .sidebar{
+      width: 222px;
+      background: #333;
+      position: fixed;
+      overflow: hidden;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      z-index: 1990;
+    }
+    .sidebar ul{
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      width: 222px;
+    }
+    .layui-nav{
+      background-color: #333;
+    }
+    .layui-nav .layui-nav-item a {
+      display: block;
+      padding: 0 20px;
+      color: #fff;
+      color: rgba(255,255,255,.7);
+      transition: all .3s;
+      text-decoration: none;
+      text-align: center;
+    }
+    .layui-nav-item a.active{
+      background-color: #4CAF50;
+      color: white;
+    }
+    .layui-nav-item a:hover:not(.active) {
+      background-color: #555;
+      color: white;
+    }
+    /*搜索框样式*/
+    .main{
+      margin-left: 222px;
+    }
+    .layui-container {
+      max-width: 1440px;
+      width: auto;
+      position: relative;
+      margin: 0 auto;
+      padding: 0 15px;
+      box-sizing: border-box;
+    }
+    .s .search-bg{
+      height: 233px;
+    }
+    .search{
+      margin-top: 0;
+      padding-top: 60px;
+    }
+    .search-top {
+      font-size: 1.5rem;
+      line-height: 36px;
+    }
+      /*下方为搜索框常用按钮样式*/
+      /*下方为常用按钮点击后的样式 */
+    .layui-menu{
+      padding: 0px;
+      margin: 0px;
+    }
+    .layui-dropdown{
+      text-align: center;
+      height: 121px;
+      width: 762px;
+    }
+    .layui-menu li{
+      padding: 0px;
+      margin: 0px;
+      width: 152px;
+      height: 40px;
+      float: left;
+    }
+    #changyong-0{
+      font-size:1.5rem;
+    }
+  </style>
+  <script>
+    layui.use('element', function(){
+      var element = layui.element;
+      
+      //一些事件触发
+      element.on('tab(demo)', function(data){
+        console.log(data);
+      });
+    });
+  </script>
+</head>
+<body>
+<!-- 你的 HTML 代码 -->
+<!-- 导航栏 -->
+<aside class="sidebar">
+  <!-- 导航logo -->
+  <div class="sidebar-logo">
+    <h1  style="text-align: center">
+      <a href="" title="龙猫导航" >
+        <img src="" alt="">
+        <span style="color: rgba(255,255,255,.7);  " >龙猫网</span>
+      </a>
+    </h1>
+  </div>
+  <!-- 导航条 软件资源 生活娱乐 购物省钱 影视视频 自学导航 SEO运营 设计导航 前端开发-->
+  <div class="sidebar-nav f-pr f-oh" >
+    <ul  id="nav-1" class="layui-nav layui-nav-tree" lay-filter="test" lay-shrink="all">
+      <!-- 侧边导航: <ul class="layui-nav layui-nav-tree layui-nav-side"> -->
+      <template v-for="(nav,index) in navs">
+        <li v-if="index<=10" class="layui-nav-item" >
+          <a href="javascript:;">{{nav.title}}</a>
+          <dl class="layui-nav-child" id="small-navs">
+            <dd v-for="small in nav.small_nav">
+              <a href="javascript:;">{{small.title}}</a>
+            </dd>
+          </dl>
+        </li>
+      </template>
+    </ul>
+  </div>
+  <!-- 下方为导航条DATA -->
+  <script>
+      var example1 = new Vue({
+        el: '#nav-1',
+        data: {
+          navs: [
+          { href: '', title: '软件资源',small_nav:[
+          {href:"",title:"小众推荐"},
+          {href:"",title:"在线工具"},
+          {href:"",title:"发现APP"},
+          {href:"",title:"游戏娱乐"},
+          {href:"",title:"软件下载"},
+          {href:"",title:"杂志小说"},
+          {href:"",title:"系统下载"},
+          {href:"",title:"资源搜索"},
+          {href:"",title:"图片搜索"},
+          ]},
+          { href: '', title: '生活娱乐',small_nav:[
+          {href:"",title:"音乐电台"},
+          {href:"",title:"厨房美食"},
+          {href:"",title:"家居装修"},
+          {href:"",title:"社交问答"},
+          {href:"",title:"新闻资讯"},
+          {href:"",title:"发现知道"},
+          {href:"",title:"医疗健康"},
+          {href:"",title:"旅游攻略"},
+          {href:"",title:"有趣网站"},
+          {href:"",title:"举报维权"},
+          {href:"",title:"公益网站"},
+
+          ]},
+          { href: '', title: '购物省钱',small_nav:[
+          {href:"",title:"综合购物"},
+          {href:"",title:"省钱攻略"},
+          {href:"",title:"品牌店铺"},
+          {href:"",title:"女装店铺"},
+          {href:"",title:"男装店铺"},
+          {href:"",title:"童装店铺"},
+          {href:"",title:"鞋子"},
+          {href:"",title:"袜子"},
+          {href:"",title:"首饰搭配"},
+          {href:"",title:"箱子包包"},
+          {href:"",title:"生活用品"},
+
+          ]},
+          { href: '', title: '影视视频',small_nav:[
+          {href:"",title:"在线视频"},
+          {href:"",title:"电影下载"},
+          {href:"",title:"追剧必备"},
+          {href:"",title:"动漫频道"},
+          {href:"",title:"视频安利"},
+          {href:"",title:"弹幕直播"},
+          {href:"",title:"电视直播"},
+          {href:"",title:"图解电影"},
+          {href:"",title:"电影相关"},
+          {href:"",title:"字幕下载"},
+          {href:"",title:"惊悚恐怖"},
+
+          ]},
+          { href: '', title: '自学导航',small_nav:[
+          {href:"",title:"综合课堂"},
+          {href:"",title:"office办公"},
+          {href:"",title:"技术软件"},
+          {href:"",title:"摄影教程"},
+          {href:"",title:"外语学习"},
+          {href:"",title:"大学●公开课"},
+          {href:"",title:"中小学教育"},
+          {href:"",title:"考公考研"},
+          {href:"",title:"学术"},
+          {href:"",title:"手工制作"},
+          ]},
+          { href: '', title: 'SEO运营',small_nav:[
+          {href:"",title:"热门数据"},
+          {href:"",title:"SEO工具"},
+          {href:"",title:"SEO教程"},
+          {href:"",title:"思维脑图"},
+          {href:"",title:"数据采集"},
+          {href:"",title:"微信运营"},
+          {href:"",title:"编辑工具"},
+          {href:"",title:"H5场景"},
+          {href:"",title:"项目制作"},
+          {href:"",title:"社工查询"},
+          ]},
+          { href: '', title: '设计导航',small_nav:[
+          {href:"",title:"综合课堂"},
+          {href:"",title:"office办公"},
+          {href:"",title:"技术软件"},
+          {href:"",title:"摄影教程"},
+          {href:"",title:"外语学习"},
+          {href:"",title:"大学●公开课"},
+          {href:"",title:"中小学教育"},
+          {href:"",title:"考公考研"},
+          {href:"",title:"学术"},
+          {href:"",title:"手工制作"},
+          ]},
+          { href: '', title: '前端开发',small_nav:[
+          {href:"",title:"综合课堂"},
+          {href:"",title:"office办公"},
+          {href:"",title:"技术软件"},
+          {href:"",title:"摄影教程"},
+          {href:"",title:"外语学习"},
+          {href:"",title:"大学●公开课"},
+          {href:"",title:"中小学教育"},
+          {href:"",title:"考公考研"},
+          {href:"",title:"学术"},
+          {href:"",title:"手工制作"},
+          ]},
+          ]
+        }
+      })
+    </script>
+</aside>
+<main class="main" >
+  <div class="layui-container">
+    <div class="search-bg layui-col-space20">
+      <div class="search">
+          <div class="search-top f-cb f-pr">
+            <div class="search-type f-fl" id="changyong-0">
+                常用
+                <i class="layui-icon layui-icon-down layui-font-12"></i>
+            </div> 
+            <!-- 下方为常用layui的dropdown引用 -->
+            <script>
+            layui.use('dropdown', function(){
+              var dropdown = layui.dropdown
+              dropdown.render({
+                elem: '#changyong-0' //可绑定在任意元素中，此处以上述按钮为例
+                ,data: [{
+                  title: '常用',
+                  id: 100,
+                },{
+                  title:'搜索',
+                  id:101,
+                },{
+                  title:'设计',
+                  id:102,
+                },{
+                  title:'前端',
+                  id:103,
+                },{
+                  title:'视频',
+                  id:104,
+                },{
+                  title:'音频',
+                  id:105,
+                },{
+                  title:'社交',
+                  id:106,
+                },{
+                  title:'翻译',
+                  id:107,
+                },{
+                  title:'SEO',
+                  id:108,
+                },{
+                  title:'文库',
+                  id:109,
+                },{
+                  title:'APP',
+                  id:110,
+                },{
+                  title:'生活',
+                  id:111,
+                },{
+                  title:'磁力',
+                  id:112,
+                },{
+                  title:'动漫',
+                  id:113,
+                },{
+                  title:'学术',
+                  id:114,
+                }]
+                ,id: 'changyong-0'
+                //菜单被点击的事件
+                ,click: function(obj){
+                  console.log(obj);
+                  layer.msg('回调返回的参数已显示再控制台');
+                }
+              });
+            });
+            </script>
+          </div>
+        <form method="get" target="_blank" class="search-form f-pr">
+          <input type="text" id="keywords" class="keywords" required="" autocomplete="off" placeholder="百度一下">
+          <button type="submit" id="btn-search"><span>搜索</span></button>
+        </form>
+      </div>
+      <div></div>
+    </div>
+  </div>
+  <div></div>
+</main>
+</body>
+
+</html>
